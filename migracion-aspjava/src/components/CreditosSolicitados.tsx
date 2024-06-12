@@ -4,11 +4,12 @@ import '../css/styles.css';
 
 interface Solicitud {
     dni: string;
-    nombre: string;
+    nombres: string;
     celular: string;
-    email: string;
+    correo: string;
     monto: string;
     plazo: string;
+    moneda: string;
 }
 
 const CreditosSolicitados: React.FC = () => {
@@ -23,7 +24,7 @@ const CreditosSolicitados: React.FC = () => {
                 setSolicitudes(data);
                 setLoading(false);
             } catch (error) {
-                setError('Error fetching solicitudes');
+                setError('Error consultando solicitudes');
                 setLoading(false);
             }
         };
@@ -58,10 +59,10 @@ const CreditosSolicitados: React.FC = () => {
                         {solicitudes.map((solicitud, index) => (
                             <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
                                 <td>{solicitud.dni}</td>
-                                <td>{solicitud.nombre}</td>
+                                <td>{solicitud.nombres}</td>
                                 <td>{solicitud.celular}</td>
-                                <td>{solicitud.email}</td>
-                                <td>{solicitud.monto}</td>
+                                <td>{solicitud.correo}</td>
+                                <td>{solicitud.moneda}/. {solicitud.monto}</td>
                                 <td>{solicitud.plazo}</td>
                             </tr>
                         ))}

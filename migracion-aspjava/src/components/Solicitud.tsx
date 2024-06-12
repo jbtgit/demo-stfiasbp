@@ -20,8 +20,6 @@ const SolicitarCredito: React.FC = () => {
         monto: '',
         plazo: ''
     });
-    
-
     useEffect(() => {
         const fetchMonedas = async () => {
             const monedasData = await getMonedas();
@@ -82,12 +80,29 @@ const SolicitarCredito: React.FC = () => {
         return valid;
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         if (validateForm()) {
-            // Aquí puedes manejar el envío del formulario
-            console.log('Formulario válido');
+           const data = await registrarSolicitud({
+                "dni" : dni,
+                "nombres" : nombres,
+                "celular" : celular,
+                "correo" : email,
+                "moneda" : moneda,
+                "monto" : monto,
+                "plazo" : plazo
+            });
+            alert(data);
+            setDni("");
+            setNombres("");
+            setCelular("");
+            setEmail("");
+            setMoneda("");
+            setMonto("");
+            setPlazo("");
+            setDatos(false);
         }
+        
     };
 
     return (
